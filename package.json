@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "next": "^12.0.8",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "name": "chat-project",
+  "description": "projeto desenvolvido na imersão React Alura",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ronaldjga/chat-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ronaldjga/chat-project/issues"
+  },
+  "homepage": "https://github.com/Ronaldjga/chat-project#readme"
+}
