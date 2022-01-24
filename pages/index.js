@@ -1,4 +1,4 @@
-import { Box, Button, Text, Textfild, Image } from '@skynexui/components';
+import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
 
 function GlobalStyle() {
@@ -32,7 +32,7 @@ function GlobalStyle() {
 }
 
 function Titulo(props) {
-    const Tag = props.tag
+    const Tag = props.tag || 'h1';
 
     return (
         <>
