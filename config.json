@@ -1,7 +1,6 @@
 {
     "name": "Discord - Alura Matrix",
     "stickers": [
-        "https://www.behance.net/gallery/102763845/-blossom-fall/modules/591370621",
         "http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif",
         "https://media1.giphy.com/media/BdghqxNFV4efm/200.gif",
         "https://c.tenor.com/TKpmh4WFEsAAAAAC/alura-gaveta-filmes.gif",
@@ -16,7 +15,7 @@
                 "100": "#C1EAC5",
                 "200": "#A3D9A5",
                 "300": "#7BC47F",
-                "400": "#57AE5B",
+                "400": "#E5E5E5",
                 "500": "#F2BF5E",
                 "600": "#022026",
                 "700": "#383737",

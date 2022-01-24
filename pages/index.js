@@ -74,8 +74,8 @@ export default function PaginaInicial() {
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.primary[200],
-          backgroundImage: 'url(https://images.unsplash.com/photo-1548625361-58a9b86aa83b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80)',
+          backgroundColor: appConfig.theme.colors.primary[400],
+          backgroundImage: 'url(https://images.unsplash.com/photo-1550010565-d20b4cb367b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
@@ -115,7 +115,7 @@ export default function PaginaInicial() {
                   textColor: appConfig.theme.colors.neutrals[200],
                   mainColor: appConfig.theme.colors.neutrals[900],
                   mainColorHighlight: appConfig.theme.colors.primary[500],
-                  backgroundColor: appConfig.theme.colors.neutrals[800],
+                  backgroundColor: appConfig.theme.colors.primary[400],
                 },
               }}
             />
@@ -123,11 +123,14 @@ export default function PaginaInicial() {
               type='submit'
               label='Entrar'
               fullWidth
+              styleSheet={{
+                border: `1px solid ${appConfig.theme.colors.primary[500]}`,
+              }}
               buttonColors={{
                 contrastColor: appConfig.theme.colors.neutrals["000"],
                 mainColor: appConfig.theme.colors.primary[500],
                 mainColorLight: appConfig.theme.colors.primary[400],
-                mainColorStrong: appConfig.theme.colors.primary[600],
+                mainColorStrong: appConfig.theme.colors.neutrals[500],
               }}
             />
           </Box>
@@ -144,10 +147,11 @@ export default function PaginaInicial() {
               padding: '16px',
               backgroundColor: appConfig.theme.colors.neutrals[800],
               border: '1px solid',
-              borderColor: appConfig.theme.colors.neutrals[999],
+              borderColor: appConfig.theme.colors.primary[500],
               borderRadius: '10px',
               flex: 1,
               minHeight: '240px',
+              
             }}
           >
             <Image
