@@ -1,4 +1,5 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import react from 'react';
 import appConfig from '../config.json';
 
 function GlobalStyle() {
@@ -66,8 +67,8 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-  const username = 'Ronaldjga';
-  const location = 'Belém, Pa-Brasil'
+  // UseState nos retorna duas respostas em array, o nome + SetNome. Usamos ReactUseState('value inicial da varialvel nome)
+  const [username, setUsername] = react.useState('Ronaldjga')
 
   return (
     <>
@@ -84,16 +85,18 @@ export default function PaginaInicial() {
           styleSheet={{
             display: 'flex',
             alignItems: 'center',
+            gap:'15px',
             justifyContent: 'space-between',
             flexDirection: {
+              lg:'row',
               xs: 'column',
-              sm: 'row',
+              sm: 'column',
             },
-            width: '100%', maxWidth: '700px',
+            width: '100%', maxWidth: {lg:'700px', xs:'75%',},
             borderRadius: '5px', padding: '32px', margin: '16px',
             boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
             backgroundColor: appConfig.theme.colors.primary[600],
-            border:`2px solid ${appConfig.theme.colors.primary[500]}`
+            border: `2px solid ${appConfig.theme.colors.primary[500]}`
           }}
         >
           {/* Formulário */}
@@ -101,7 +104,7 @@ export default function PaginaInicial() {
             as="form"
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
+              width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px', order:'2',
             }}
           >
             <Titulo tag="h2">Boas vindas de volta!</Titulo>
@@ -109,29 +112,55 @@ export default function PaginaInicial() {
               {appConfig.name}
             </Text>
 
+
+            {/* <input
+              type="text"
+              value={username}
+              //onChange capta as alterações no input
+              onChange={function (e) {
+                console.log('usuario está digitando', e.target.value);
+                // Onde está o valor??
+                const valor = e.target.value;
+                // Trocar o valor da variavel
+                // Atravéz do react avise quem precisa, por isso é melhor utilizando react
+                setUsername(valor)
+              }}
+            /> */}
+
             <TextField
+              value={username}
+              //onChange capta as alterações no input
+              onChange={function (e) {
+                console.log('usuario está digitando', e.target.value);
+                // Onde está o valor??
+                const valor = e.target.value;
+                // Trocar o valor da variavel
+                // Atravéz do react avise quem precisa, por isso é melhor utilizando react
+                setUsername(valor)
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
-                  textColor: appConfig.theme.colors.neutrals[200],
+                  textColor: appConfig.theme.colors.neutrals[500],
                   mainColor: appConfig.theme.colors.neutrals[900],
                   mainColorHighlight: appConfig.theme.colors.primary[500],
                   backgroundColor: appConfig.theme.colors.primary[400],
                 },
               }}
             />
+
             <Button
               type='submit'
               label='Entrar'
               fullWidth
               styleSheet={{
-                border: `1px solid ${appConfig.theme.colors.primary[500]}`,
+                border: `2px solid ${appConfig.theme.colors.primary[500]}`,
               }}
               buttonColors={{
                 contrastColor: appConfig.theme.colors.neutrals["000"],
-                mainColor: appConfig.theme.colors.primary[500],
+                mainColor: appConfig.theme.colors.primary[600],
                 mainColorLight: appConfig.theme.colors.primary[400],
-                mainColorStrong: appConfig.theme.colors.neutrals[500],
+                mainColorStrong: appConfig.theme.colors.primary[500],
               }}
             />
           </Box>
@@ -152,7 +181,7 @@ export default function PaginaInicial() {
               borderRadius: '10px',
               flex: 1,
               minHeight: '240px',
-              
+
             }}
           >
             <Image
@@ -171,12 +200,9 @@ export default function PaginaInicial() {
                 padding: '3px 10px',
                 borderRadius: '1000px',
                 width: '100%',
-                textAlign: 'center',
               }}
             >
               {username}
-              <br></br>
-              {location}
             </Text>
           </Box>
           {/* Photo Area */}
