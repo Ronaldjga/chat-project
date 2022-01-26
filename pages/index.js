@@ -1,36 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import react from 'react';
+import { useRouter } from 'next/router'
 import appConfig from '../config.json';
 
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-        * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */ 
-      html, body, #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-
-      /* ./App fit Height */ 
-        `}</style>
-  )
-}
 
 function Titulo(props) {
   const Tag = props.tag || 'h1';
@@ -69,10 +41,10 @@ function Titulo(props) {
 export default function PaginaInicial() {
   // UseState nos retorna duas respostas em array, o nome + SetNome. Usamos ReactUseState('value inicial da varialvel nome)
   const [username, setUsername] = react.useState('Ronaldjga')
+  const rosteamento = useRouter()
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -102,6 +74,12 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (e) {
+              e.preventDefault();
+              console.log('Alguem submeteu o form')
+
+              rosteamento.push('/chat')
+            }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px', order:'2',
@@ -129,9 +107,8 @@ export default function PaginaInicial() {
 
             <TextField
               value={username}
-              //onChange capta as alterações no input
+              //onChange sempre que tiver uma mudança ele monitora
               onChange={function (e) {
-                console.log('usuario está digitando', e.target.value);
                 // Onde está o valor??
                 const valor = e.target.value;
                 // Trocar o valor da variavel
@@ -200,6 +177,7 @@ export default function PaginaInicial() {
                 padding: '3px 10px',
                 borderRadius: '1000px',
                 width: '100%',
+                textAlign: 'center',
               }}
             >
               {username}
