@@ -67,6 +67,7 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   const username = 'Ronaldjga';
+  const location = 'Belém, Pa-Brasil'
 
   return (
     <>
@@ -163,14 +164,19 @@ export default function PaginaInicial() {
             />
             <Text
               variant="body4"
+              tag='h2'
               styleSheet={{
                 color: appConfig.theme.colors.neutrals[200],
                 backgroundColor: appConfig.theme.colors.neutrals[900],
                 padding: '3px 10px',
-                borderRadius: '1000px'
+                borderRadius: '1000px',
+                width: '100%',
+                textAlign: 'center',
               }}
             >
               {username}
+              <br></br>
+              {location}
             </Text>
           </Box>
           {/* Photo Area */}
