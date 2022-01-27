@@ -19,6 +19,7 @@ export default function ChatPage() {
         supabaseClient
             .from('Mensagens')
             .select('*')
+            .order('id', { ascending: false})
             .then(({ data }) => {
                 setListaDeMensagens(data)
             });
@@ -34,7 +35,6 @@ export default function ChatPage() {
 
         supabaseClient.from('Mensagens')
             .insert([mensagem])
-            .order('id', { ascending: false})
             .then(({ data }) => {
                 setListaDeMensagens([
                     data[0],
@@ -84,7 +84,7 @@ export default function ChatPage() {
                     }}
                 >
 
-                    <MessageList mensagens={listaDeMensagens} />
+                    <MessageList mensagens={listaDeMensagens}/>
 
                     {/* {listaDeMensagens.map((mensagemAtual) => {
                         return (
@@ -100,7 +100,7 @@ export default function ChatPage() {
                         as="form"
                         styleSheet={{
                             display: 'flex',
-                            alignItems: 'center',
+                            justifyContent: 'space-between',
                         }}
                     >
                         <TextField
@@ -118,7 +118,7 @@ export default function ChatPage() {
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
-                                width: '100%',
+                                width: '93%',
                                 border: '0',
                                 resize: 'none',
                                 borderRadius: '5px',
@@ -134,6 +134,23 @@ export default function ChatPage() {
                                 border: `1px solid ${appConfig.theme.colors.primary[400]}`,
                                     
                                 }
+                            }}
+                        />
+                        
+                        <Button
+                            iconName="arrowUp"
+                            buttonColors={appConfig.theme.colors.primary[500]}
+                            styleSheet={{
+                                fontSize: '20px',
+                                backgroundColor: appConfig.theme.colors.primary[500],
+                                color: appConfig.theme.colors.primary[600],
+                                hover: {
+                                    backgroundColor: appConfig.theme.colors.neutrals[200],
+                                }
+                            }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleNovaMensagem(mensagem)
                             }}
                         />
                     </Box>
@@ -181,6 +198,7 @@ function MessageList(props) {
                         key={mensagem.id}
                         tag="li"
                         styleSheet={{
+                            position:'relative',
                             borderRadius: '5px',
                             padding: '6px',
                             marginBottom: '12px',
@@ -207,6 +225,9 @@ function MessageList(props) {
                             <Text tag="strong">
                                 {mensagem.de}
                             </Text>
+
+                            
+
                             <Text
                                 styleSheet={{
                                     fontSize: '10px',
@@ -216,7 +237,20 @@ function MessageList(props) {
                                 tag="span"
                             >
                                 {(new Date().toLocaleDateString())}
+
+                                <Button iconName="FaRegTrashAlt"
+                                    colorVariant='negative'
+                                    variant='tertiary'
+                                    styleSheet={{
+                                        position: 'absolute',
+                                        right:'25px',
+                                        fontSize: '15px',
+                                        color: appConfig.theme.colors.primary[500],
+                                }}
+                                />
+                                
                             </Text>
+
                         </Box>
                         {mensagem.message}
                     </Text>
