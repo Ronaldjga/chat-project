@@ -195,9 +195,6 @@ function MessageList(props) {
                 )
 
             })}
-
-
-            
         </Box>
     )
 }
