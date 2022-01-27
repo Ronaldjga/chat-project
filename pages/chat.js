@@ -2,19 +2,47 @@ import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import react, { useState } from 'react';
 import React from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMwNDg0OSwiZXhwIjoxOTU4ODgwODQ5fQ.hiNNTJvYUxjpksM6XWwbM1Xj9DzBFhmxO0ytOx-YJGM';
+
+const SUPABASE_URL = 'https://eweypzuiumvvbmsghrvz.supabase.co'
+
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = react.useState('')
     const [listaDeMensagens, setListaDeMensagens] = react.useState([])
+
+    react.useEffect(() => {
+        supabaseClient
+            .from('Mensagens')
+            .select('*')
+            .then(({ data }) => {
+                setListaDeMensagens(data)
+            });
+        
+    }, [])
     
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
+            // id: listaDeMensagens.length + 1,
             de: 'Ronaldjga',
             message: novaMensagem,
         };
-        setListaDeMensagens([mensagem,...listaDeMensagens,]);
-        setMensagem('');
+
+        supabaseClient.from('Mensagens')
+            .insert([mensagem])
+            .order('id', { ascending: false})
+            .then(({ data }) => {
+                setListaDeMensagens([
+                    data[0],
+                    ...listaDeMensagens,
+                ]);
+            })
+            
+            setMensagem('');
     }
 
     return (
@@ -174,7 +202,7 @@ function MessageList(props) {
                                     display: 'inline-block',
                                     marginRight: '8px',
                                 }}
-                                src={`https://github.com/Ronaldjga.png`}
+                                src={`https://github.com/${mensagem.de}.png`}
                             />
                             <Text tag="strong">
                                 {mensagem.de}
