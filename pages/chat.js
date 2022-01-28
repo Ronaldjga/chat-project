@@ -12,18 +12,21 @@ const SUPABASE_URL = 'https://eweypzuiumvvbmsghrvz.supabase.co'
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+function escutaMensagensRealTime(adicionaMensagem) {
+    supabaseClient.from('Mensagens')
+        .on('INSERT', (respostaLive) => {
+            adicionaMensagem(respostaLive.new)
+            console.log(respostaLive.new)
+        })
+        .subscribe();
+}
+
 
 export default function ChatPage() {
     const rosteamento = useRouter()
     const usuarioLogado = rosteamento.query.username;
     const [mensagem, setMensagem] = react.useState('')
-    const [listaDeMensagens, setListaDeMensagens] = react.useState([
-        // {
-        //     id: 1,
-        //     de: 'Ronaldjga',
-        //     message: ':sticker: http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif'
-        // }
-    ])
+    const [listaDeMensagens, setListaDeMensagens] = react.useState([])
 
     react.useEffect(() => {
         supabaseClient
@@ -33,6 +36,14 @@ export default function ChatPage() {
             .then(({ data }) => {
                 setListaDeMensagens(data)
             });
+        escutaMensagensRealTime((novaMensagem) => {
+            setListaDeMensagens((valorAtualLista) => {
+                return [
+                    novaMensagem,
+                ...valorAtualLista,
+                ]
+            });
+        })
         
     }, [])
     
@@ -46,10 +57,7 @@ export default function ChatPage() {
         supabaseClient.from('Mensagens')
             .insert([mensagem])
             .then(({ data }) => {
-                setListaDeMensagens([
-                    data[0],
-                    ...listaDeMensagens,
-                ]);
+                console.log('Crinado mensagem', data)
             })
             
             setMensagem('');
