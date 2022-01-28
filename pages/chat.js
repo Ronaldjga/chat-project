@@ -57,7 +57,7 @@ export default function ChatPage() {
         supabaseClient.from('Mensagens')
             .insert([mensagem])
             .then(({ data }) => {
-                console.log('Crinado mensagem', data)
+                
             })
             
             setMensagem('');
