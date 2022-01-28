@@ -14,10 +14,10 @@ export function ButtonSendSticker(props) {
       <Button
         buttonColors={appConfig.theme.colors.primary[500]}
         styleSheet={{
-          borderRadius: '50%',
+          borderRadius: '999px',
           padding: '0 3px 0 0',
-          minWidth: '50px',
-          minHeight: '50px',
+          minWidth: {sm:'20px'},
+          minHeight: {sm:'20px'},
           fontSize: '20px',
           marginBottom: '8px',
           lineHeight: '0',
