@@ -1,7 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import react from 'react';
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import appConfig from '../config.json';
+import { route } from 'next/dist/server/router';
 
 
 
@@ -82,7 +83,7 @@ export default function PaginaInicial() {
                 console.log('Sem usuario')
               } else {
                 console.log('Alguem submeteu o form')
-                rosteamento.push('/chat')
+                rosteamento.push(`/chat?username=${username}`)
               }
             }}
             styleSheet={{
