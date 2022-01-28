@@ -16,7 +16,7 @@ function escutaMensagensRealTime(adicionaMensagem) {
     supabaseClient.from('Mensagens')
         .on('INSERT', (respostaLive) => {
             adicionaMensagem(respostaLive.new)
-            console.log(respostaLive.new)
+            
         })
         .subscribe();
 }
