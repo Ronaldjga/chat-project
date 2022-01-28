@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import appConfig from '../config.json';
 
 
+
 function Titulo(props) {
   const Tag = props.tag || 'h1';
 
@@ -40,7 +41,7 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   // UseState nos retorna duas respostas em array, o nome + SetNome. Usamos ReactUseState('value inicial da varialvel nome)
-  const [username, setUsername] = react.useState('Ronaldjga')
+  const [username, setUsername] = react.useState('')
   const rosteamento = useRouter()
 
   return (
@@ -76,9 +77,13 @@ export default function PaginaInicial() {
             as="form"
             onSubmit={function (e) {
               e.preventDefault();
-              console.log('Alguem submeteu o form')
-
-              rosteamento.push('/chat')
+              if (username.length <= 2) {
+                rosteamento.push('/')
+                console.log('Sem usuario')
+              } else {
+                console.log('Alguem submeteu o form')
+                rosteamento.push('/chat')
+              }
             }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -107,6 +112,7 @@ export default function PaginaInicial() {
 
             <TextField
               value={username}
+              placeholder='Usuario do Github'
               //onChange sempre que tiver uma mudança ele monitora
               onChange={function (e) {
                 // Onde está o valor??
@@ -140,6 +146,10 @@ export default function PaginaInicial() {
                 mainColorStrong: appConfig.theme.colors.primary[500],
               }}
             />
+
+            
+            
+            
           </Box>
           {/* Formulário */}
 
@@ -166,7 +176,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={`https://github.com/${username}.png`}
+              src={username.length <= 2 ? `https://www.promoview.com.br/uploads/images/unnamed%2819%29.png` : `https://github.com/${username}.png`}
             />
             <Text
               variant="body4"
@@ -180,7 +190,7 @@ export default function PaginaInicial() {
                 textAlign: 'center',
               }}
             >
-              {username}
+              {username.length <= 2 ? 'Sem Usuario' : `${username}`}
             </Text>
           </Box>
           {/* Photo Area */}
