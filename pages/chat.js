@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 import { createClient } from '@supabase/supabase-js';
+import { ButtonSendSticker } from '../src/components/ButtonSendSticker.js'
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMwNDg0OSwiZXhwIjoxOTU4ODgwODQ5fQ.hiNNTJvYUxjpksM6XWwbM1Xj9DzBFhmxO0ytOx-YJGM';
 
@@ -16,7 +17,13 @@ export default function ChatPage() {
     const rosteamento = useRouter()
     const usuarioLogado = rosteamento.query.username;
     const [mensagem, setMensagem] = react.useState('')
-    const [listaDeMensagens, setListaDeMensagens] = react.useState([])
+    const [listaDeMensagens, setListaDeMensagens] = react.useState([
+        // {
+        //     id: 1,
+        //     de: 'Ronaldjga',
+        //     message: ':sticker: http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif'
+        // }
+    ])
 
     react.useEffect(() => {
         supabaseClient
@@ -122,7 +129,7 @@ export default function ChatPage() {
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
-                                width: '93%',
+                                width: '85%',
                                 border: '0',
                                 resize: 'none',
                                 borderRadius: '5px',
@@ -141,6 +148,11 @@ export default function ChatPage() {
                             }}
                         />
                         
+                        <ButtonSendSticker onStickerClick={(sticker) => {
+                            console.log('[USANDO O COMPONENTE] Salva esse Sticker no banco', sticker)
+                            handleNovaMensagem(`:sticker:${sticker}`)
+                        }} />
+
                         <Button
                             iconName="arrowUp"
                             buttonColors={appConfig.theme.colors.primary[500]}
@@ -262,11 +274,19 @@ function MessageList(props) {
                                         
                                     }}
                                 /> */}
-                                
                             </Text>
 
                         </Box>
-                        {mensagem.message}
+                        {/* condicional: {mensagem.menssage.starts.with(':sticker').toString()} */}
+                                {mensagem.message.startsWith(':sticker:')
+                                    ? (
+                                        <Image src={mensagem.message.replace(':sticker:', '')}/>
+                                )
+                                    : (
+                                        mensagem.message
+                                    )
+                                }
+                        {/* {mensagem.message} */}
                     </Text>
                 )
 
