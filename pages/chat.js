@@ -84,7 +84,8 @@ export default function ChatPage() {
                     }}
                 >
 
-                    <MessageList mensagens={listaDeMensagens}/>
+                    <MessageList mensagens={listaDeMensagens} />
+                    
 
                     {/* {listaDeMensagens.map((mensagemAtual) => {
                         return (
@@ -149,8 +150,13 @@ export default function ChatPage() {
                                 }
                             }}
                             onClick={(e) => {
-                                e.preventDefault();
-                                handleNovaMensagem(mensagem)
+                                if (mensagem.length === 0) {
+                                    e.preventDefault();
+                                    console.log('nao vou enviar')
+                                } else {
+                                    e.preventDefault();
+                                    handleNovaMensagem(mensagem)
+                                }
                             }}
                         />
                     </Box>
@@ -238,7 +244,7 @@ function MessageList(props) {
                             >
                                 {(new Date().toLocaleDateString())}
 
-                                <Button iconName="FaRegTrashAlt"
+                                {/* <Button iconName="FaRegTrashAlt"
                                     colorVariant='negative'
                                     variant='tertiary'
                                     styleSheet={{
@@ -246,8 +252,13 @@ function MessageList(props) {
                                         right:'25px',
                                         fontSize: '15px',
                                         color: appConfig.theme.colors.primary[500],
-                                }}
-                                />
+                                    }}
+                                    
+                                    onClick={() => {
+                                        
+                                        
+                                    }}
+                                /> */}
                                 
                             </Text>
 
