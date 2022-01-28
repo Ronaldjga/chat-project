@@ -22,7 +22,6 @@ function escutaMensagensRealTime(adicionaMensagem) {
         .subscribe();
 }
 
-
 export default function ChatPage() {
     const rosteamento = useRouter()
     const usuarioLogado = rosteamento.query.username;
@@ -44,6 +43,7 @@ export default function ChatPage() {
                 ...valorAtualLista,
                 ]
             });
+            
         })
         
     }, [])
@@ -63,6 +63,18 @@ export default function ChatPage() {
             
             setMensagem('');
     }
+
+
+    function deletarMensagem(qualMensagem) {
+        supabaseClient.from('Mensagens')
+            .delete()
+            .match({id: qualMensagem.id})
+            .then(({data}) => {
+            
+            })
+        
+    }
+    
 
     return (
         <Box
@@ -103,7 +115,7 @@ export default function ChatPage() {
                     }}
                 >
 
-                    <MessageList mensagens={listaDeMensagens} />
+                    <MessageList mensagens={listaDeMensagens} deletarMensagem={deletarMensagem}/>
                     
 
                     {/* {listaDeMensagens.map((mensagemAtual) => {
@@ -281,12 +293,8 @@ function MessageList(props) {
                                     }}
                                     
                                     onClick={() => {
-                                        supabaseClient.from('Mensagens')
-                                            .delete()
-                                            .match({ id: mensagem.id })
-                                            .then(({ data }) => {
-                                                
-                                            })
+                                        
+                                        props.deletarMensagem(mensagem)
                                     }}
                                 />
                             </Text>
