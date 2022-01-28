@@ -18,6 +18,7 @@ function escutaMensagensRealTime(adicionaMensagem) {
             adicionaMensagem(respostaLive.new)
             
         })
+        
         .subscribe();
 }
 
@@ -239,12 +240,14 @@ function MessageList(props) {
                         <Box
                             styleSheet={{
                                 marginBottom: '8px',
+                                display: 'flex',
+                                alignItems:'center',
                             }}
                         >
                             <Image
                                 styleSheet={{
-                                    width: '20px',
-                                    height: '20px',
+                                    width: '35px',
+                                    height: '35px',
                                     borderRadius: '50%',
                                     display: 'inline-block',
                                     marginRight: '8px',
@@ -267,7 +270,7 @@ function MessageList(props) {
                             >
                                 {(new Date().toLocaleDateString())}
 
-                                {/* <Button iconName="FaRegTrashAlt"
+                                <Button iconName="FaRegTrashAlt"
                                     colorVariant='negative'
                                     variant='tertiary'
                                     styleSheet={{
@@ -278,10 +281,14 @@ function MessageList(props) {
                                     }}
                                     
                                     onClick={() => {
-                                        
-                                        
+                                        supabaseClient.from('Mensagens')
+                                            .delete()
+                                            .match({ id: mensagem.id })
+                                            .then(({ data }) => {
+                                                
+                                            })
                                     }}
-                                /> */}
+                                />
                             </Text>
 
                         </Box>

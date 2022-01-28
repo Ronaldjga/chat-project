@@ -12,6 +12,7 @@ export function ButtonSendSticker(props) {
       }}
     >
       <Button
+        buttonColors={appConfig.theme.colors.primary[500]}
         styleSheet={{
           borderRadius: '50%',
           padding: '0 3px 0 0',
@@ -23,10 +24,11 @@ export function ButtonSendSticker(props) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.neutrals[300],
-          filter: isOpen ? 'grayscale(0)' : 'grayscale(1)',
+          backgroundColor: appConfig.theme.colors.primary[500],
+          filter: isOpen ? 'grayscale(0)' : 'grayscale(0)',
           hover: {
             filter: 'grayscale(0)',
+            backgroundColor: appConfig.theme.colors.primary[400],
           }
         }}
         label="😋"
