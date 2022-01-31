@@ -16,8 +16,8 @@ export function ButtonSendSticker(props) {
         styleSheet={{
           borderRadius: '999px',
           padding: '0 3px 0 0',
-          minWidth: {sm:'20px'},
-          minHeight: {sm:'20px'},
+          minWidth: {sm:'20px', xl:'50px'},
+          minHeight: {sm:'20px', xl:'50px'},
           fontSize: '20px',
           marginBottom: '8px',
           lineHeight: '0',
